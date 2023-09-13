@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Quiz</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header>
+        <h1 id="title">Code Quiz</h1>
+        <p id="header-text">Your score equals the seconds remaining from the timer. For each incorrect answer, 10 seconds will be deducted from the timer and score.</p>
+        <a id="view-scores" class="header-style" href="#">View Recent Scores</a>
+        <br></br>
+        <p id="timer" class="header-style"></p>
+        <br></br>
+    </header>
+
+    <div id="quiz">        
+        <form id="form">
+            <p id="question">Question</p>
+
+            <input type="radio" id="option-a" name="option" value="0">
+            <label for="option-1">A</label><br>
+
+            <input type="radio" id="option-b" name="option" value="1">
+            <label for="option-2">B</label><br>
+
+            <input type="radio" id="option-c" name="option" value="2">
+            <label for="option-3">C</label><br>
+
+            <input type="radio" id="option-d" name="option" value="3">
+            <label for="option-4">D</label><br></br>
+
+           <button type="submit" id="submit">Submit</button>
+          </form>          
+    </div>
+
+    <br></br>
+
+    <button type="submit" id="start-quiz">Start the Quiz</button>
+    <p id="feedback"></p>
+    <button type="click" id="reset">Reset</button>
+    <br></br>
+    <button type="click" id="submit-score">Submit Score</button>
+    <br></br>
+    <button type="click" id="clear-scores">Clear Scores</button>
+
+    <script src="./script.js"></script>
+</body>
+</html>
