@@ -17,7 +17,7 @@ var correctAnswerIndex = 0;
 var deductedTime = '10';
 var deductPoints = false;
 var counter = 0;
-var numberOfQuestions = 5;
+var numberOfQuestions = 10;
 var userInfo = {
     name: '',
     score: 0
@@ -68,12 +68,12 @@ var questions = [
     },
     {
         question: "How do you declare a JavaScript variable?",
-        choices: ["var carName", "variable carName", "v carName", "Trick question!"],
-        answer: "var carName"
+        choices: ["var firstName", "variable firstName", "v firstName", "Trick question!"],
+        answer: "var firstName"
     },
     {
         question: "Which operator is used to assign a value to a variable?",
-        choices: ["====", "==", "===", "="],
+        choices: ["===", "==", "====", "="],
         answer: "="
     },
     {
@@ -82,3 +82,98 @@ var questions = [
         answer: "true"
     },
 ];
+
+// function to start the timer
+function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    var countdown = setInterval(function () {
+
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        if (deductPoints) {
+            timer = timer - parseInt(deductedTime);
+        }
+
+        deductPoints = false;
+        display.textContent = "Time Left: " + minutes + ":" + seconds;
+
+        if ((--timer < 0)||(counter == numberOfQuestions)) {
+            userInfo.score = timer;          
+            clearInterval(countdown);            
+            form.style.display = "none";
+            feedback.textContent = "Time's up! Your score is: " + timer;
+            submitScoreButton.style.display = "block";
+        }
+    }, 1000);
+
+    if (userInfo.score <= 0) {
+        userInfo.score = 0;
+    }
+    
+    return userInfo.score;
+}
+
+// Function to change to different question
+function updateQuestion(){
+    chosenQuestion = questions[(Math.floor(Math.random()*questions.length))];
+    answer = chosenQuestion.answer;
+    correctAnswerIndex = chosenQuestion.choices.indexOf(answer);
+
+    document.getElementById('question').textContent = chosenQuestion.question;
+
+    document.querySelector('label[for=option-1]').textContent = chosenQuestion.choices[0];
+    document.querySelector('label[for=option-2]').textContent = chosenQuestion.choices[1];
+    document.querySelector('label[for=option-3]').textContent = chosenQuestion.choices[2];
+    document.querySelector('label[for=option-4]').textContent = chosenQuestion.choices[3];
+}
+
+function correctAnswerCheck() {
+    if (providedAnswerIndex == correctAnswerIndex) {
+        feedback.textContent = 'Correct!';
+        deductPoints = false;
+    }
+    else {
+        feedback.textContent = 'Incorrect! ' + deductedTime + ' seconds have been deducted!';
+        deductPoints = true;
+    }
+}
+
+// Function to save the scores
+function saveScore() {
+    if (!userScores) {
+        userScores = [];
+    }
+    userScores.push(userInfo);
+    localStorage.setItem("userScores", JSON.stringify(userScores));
+}
+
+// Function for displaying previous scores
+function displayScores() {
+    title.textContent = "Recent Scores";
+    viewScores.style.display = "none";
+    form.style.display = "none";
+    timerDisplay.style.display = "none";
+    submitScoreButton.style.display = "none";
+    clearScoresButton.style.display = "block";
+
+    if (counter2 == 0) {
+        submitScoreButton.style.display = "block";
+    }
+
+    headerText.textContent = '';
+
+    for (var i = 0; i < userScores.length; i++) {
+        headerText.textContent += userScores[i].name + " had a score of " + userScores[i].score + ". " + "| ";
+    }
+}
+
+// Function for clearing your scores
+function clearScores() {
+    localStorage.clear();
+    submitScoreButton.style.display = "none"
+    headerText.textContent = 'Scores have been cleared!';
+}
+
