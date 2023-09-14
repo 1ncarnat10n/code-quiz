@@ -118,7 +118,7 @@ function startTimer(duration, display) {
 
 // Function to change to different question
 function updateQuestion(){
-    chosenQuestion = questions[(Math.floor(Math.random()*questions.length))];
+    chosenQuestion = questions[(Math.floor(Math.random() * questions.length))];
     answer = chosenQuestion.answer;
     correctAnswerIndex = chosenQuestion.choices.indexOf(answer);
 
@@ -177,3 +177,91 @@ function clearScores() {
     headerText.textContent = 'Scores have been cleared!';
 }
 
+userInfo.name = window.prompt("What is your name?");
+form.style.display = "none";
+submitScoreButton.style.display = "none";
+clearScoresButton.style.display = "none";
+
+// Displays the recent scores
+viewScores.addEventListener('click', function() {
+    if (JSON.parse(localStorage.getItem("userScores"))) {
+        counter2++;
+        displayScores();
+    }
+    else {
+        window.alert("There are no recent scores.")
+    }
+});
+
+// Displays the form
+startButton.addEventListener('click', function() {
+    counter2 = 0;
+    
+    title.textContent = "JavaScript Coding Quiz";
+    headerText.textContent = "You will answer 10 random questions. Your score equals the seconds remaining from the timer. For each incorrect answer, 10 seconds will be deducted from the timer and score. If the time falls to 0 or below, you lose."
+
+    updateQuestion();
+    viewScores.style.display = "block";
+    timerDisplay.style.display = "block";
+    startButton.style.display = "none";
+    form.style.display = "block";
+    userInfo.score = startTimer(time, timerDisplay);
+});
+
+// Submits data from the form
+form.addEventListener('submit', function(event){
+    event.preventDefault();
+
+    var firstOption = document.getElementById("option-1");
+    var secondOption = document.getElementById("option-2");
+    var thirdOption = document.getElementById("option-3");
+    var fourthOption = document.getElementById("option-4");
+
+    if (firstOption.checked){
+        providedAnswerIndex = firstOption.value; 
+        correctAnswerCheck();
+        firstOption.checked = false;
+    }
+    if (secondOption.checked){
+        providedAnswerIndex = secondOption.value;
+        correctAnswerCheck();
+        secondOption.checked = false;
+    }
+    if (thirdOption.checked){
+        providedAnswerIndex = thirdOption.value;
+        correctAnswerCheck();
+        thirdOption.checked = false;
+    }
+    if (fourthOption.checked){
+        providedAnswerIndex = fourthOption.value;
+        correctAnswerCheck();
+        fourthOption.checked = false;
+    }
+
+    counter++;
+
+    if (counter < numberOfQuestions){
+        updateQuestion();
+    } 
+});
+
+// Resets the quiz by reloading the page
+resetButton.addEventListener('click', function(){
+    location.reload();
+});
+
+// Submits the user's score
+submitScoreButton.addEventListener('click', function(){
+    counter2++;
+    saveScore();
+    displayScores();
+    viewScores.style.display = "none";
+    timerDisplay.style.display = "none";
+    feedback.style.display = "none";
+    clearScoresButton.style.display = "block";
+});
+
+// Clears the recent scores from localStorage
+clearScoresButton.addEventListener('click', function(){
+    clearScores();
+});
