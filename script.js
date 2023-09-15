@@ -198,7 +198,7 @@ startButton.addEventListener('click', function() {
     counter2 = 0;
     
     title.textContent = "JavaScript Coding Quiz";
-    headerText.textContent = "You will answer 10 random questions. Your score equals the seconds remaining from the timer. For each incorrect answer, 10 seconds will be deducted from the timer and score. If the time falls to 0 or below, you lose."
+    headerText.textContent = "You will answer a few random questions. Your score equals the seconds remaining from the timer. For each incorrect answer, 10 seconds will be deducted from the timer and score. If the time falls to 0 or below, you lose."
 
     updateQuestion();
     viewScores.style.display = "block";
