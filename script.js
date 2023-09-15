@@ -17,7 +17,7 @@ var correctAnswerIndex = 0;
 var deductedTime = '10';
 var deductPoints = false;
 var counter = 0;
-var numberOfQuestions = 10;
+var numberOfQuestions = 5;
 var userInfo = {
     name: '',
     score: 0
