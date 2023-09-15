@@ -16,6 +16,8 @@ No extra programs were required for this challenge.
 
 The following image shows the quiz's appearance and functionality:
 
+![The code quiz consists of a few randomly generated questions relating to JavaScript knowledge.](./code-quiz.png)
+
 ## Credits
 
 N/A
