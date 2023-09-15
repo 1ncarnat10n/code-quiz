@@ -54,7 +54,7 @@ var questions = [
     },
     {
         question: "What is the correct way to write a JavaScript array?",
-        choices: ["var colors = (1:'red', 2:'green', 3:'blue')", "var colors = 1 = ('red'), 2 = ('green'), 3 = ('blue')", "var colors = 'red', 'green', 'blue'", "var colors = ['red', 'green', 'blue']"],
+        choices: ["var colors = (1: 'red', 2: 'green', 3: 'blue')", "var colors = 1 = ('red'), 2 = ('green'), 3 = ('blue')", "var colors = 'red', 'green', 'blue'", "var colors = ['red', 'green', 'blue']"],
         answer: "var colors = ['red', 'green', 'blue']"},
     {
         question: "JavaScript is the same as Java.",
